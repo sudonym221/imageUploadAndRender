@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
+<%- include("./partials/header.ejs")  %>
+
 <body>
-    <div class="container">
-        <% image.forEach(function(imageS){ %>
-        <div class="card" style="width: 18rem; height: 18rem;">
-            <img src="/tmp/my-uploads/<%= imageS.path %> " class="card-img-top" alt="...">
-            <div class="card-body">
-              <p class="card-text"><%= imageS.caption %></p>
-            </div>
+    <%- include("./partials/nav.ejs")  %>
+
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="card" style="width: 15rem;">
+            <% if (image.length > 0) { %>
+            <% image.forEach(function(imageS){ %>
+    
+                <img src="/tmp/my-uploads/<%= imageS.path %> " class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text text-secondery"><%= imageS.caption %></p>
+                </div>
+    
+            <% }); %>
+            
+            <% } else { %>
+            <p>Sorry there are no Images to display :(</p>
+            <% } %>
         </div>
-        <% }); %>
     </div>
+
+    <%- include("./partials/bootstrapScripts.ejs")  %>
 </body>
+
 </html>

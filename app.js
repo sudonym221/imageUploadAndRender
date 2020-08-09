@@ -48,18 +48,22 @@ app.get('/', (req, res) => {
     .catch(err => {throw new Error})
 })
 
+app.get('/about', (req, res)=> {
+  res.render('about.ejs');
+})
+
 app.get('/upload', (req, res) => {
   res.render('upload.ejs');
 });
 
 app.post('/upload', upload.single('photo'), (req, res, next) => {
-    const saveimage = async () => {
+    const saveimage = () => {
       const tempImagePath = req.file.path;
       const imageUrl = randomNumber();
       const ext = path.extname(req.file.originalname).toLowerCase();
-      const targetPath = path.resolve(`tmp/my-uploads/${imageUrl}${ext}`);
+      const targetPath = path.resolve(`public/tmp/my-uploads/${imageUrl}${ext}`);
 
-      await fs.rename(tempImagePath, targetPath, (err) => {
+      fs.rename(tempImagePath, targetPath, (err) => {
         if (err) throw err;
         console.log('Rename complete!');
       });
