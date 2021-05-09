@@ -77,7 +77,7 @@ app.post('/upload', upload.single('photo'), (req, res, next) => {
     if (ext == '.png' || ext == '.svg' || ext == '.jpg' || ext == '.jpeg') {
       fs.rename(tempImagePath, targetPath, (err) => {
         if (err) throw err;
-        console.log('Rename complete!');
+        console.log('Upload complete!');
       });
 
       const image = new Image({
